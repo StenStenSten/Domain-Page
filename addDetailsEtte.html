@@ -8,30 +8,37 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <style>
-   .header{
+.header{
 background-color: #4E2525;
 width: 100%;
   }
   .header > img{
     width: 100%;
   }
-  .nupp1, .nupp2{
-    background-color:#4E2525;
-    margin-top: 300px;
-    margin-left: 700px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 30px;
-    padding-right: 30px; 
-    border: none;
-    color:white
+  .content{
+background-color: #AB9292;
+width: 100%;
+  }
+  html{
+    height: 100%;
+  }
+  .center{
+    text-align: center;
   }
 </style>
+
 <body>
   <div class="header">
     <img src="/picture/snekkk.png"> 
-  </div>
-  <button class="nupp1" onclick="location.href = 'addDetailsEtte.html';">Ettevõte</button>
-  <button class="nupp2" onclick="location.href = 'addDetailsEra.html';">Eraisik</button>
+    </div>
+
+  <form>
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname"><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname">
+    <label for="email">Email:</label><br>
+    <input type="text" id="email" name="email"><br>
+  </form>
+    
 </body>
-</html>
