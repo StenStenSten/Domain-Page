@@ -18,6 +18,7 @@ width: 100%;
   .content{
 background-color: #AB9292;
 width: 100%;
+text-align: center;
   }
   html{
     height: 100%;
@@ -25,20 +26,32 @@ width: 100%;
   .center{
     text-align: center;
   }
+  form{
+    display: inline-block; 
+      text-align: left; 
+      margin-top: 20px; 
+  }
 </style>
 
 <body>
   <div class="header">
     <img src="/picture/snekkk.png"> 
     </div>
-
+<div>
   <form>
     <label for="fname">First name:</label><br>
     <input type="text" id="fname" name="fname"><br>
     <label for="lname">Last name:</label><br>
-    <input type="text" id="lname" name="lname">
-    <label for="email">Email:</label><br>
+    <input type="text" id="lname" name="lname"><br>
+    <label for="text">Email:</label><br>
     <input type="text" id="email" name="email"><br>
+    <label for="text">Phone number:</label><br>
+    <input type="text" id="phonenumber" name="phonenumber"><br>
+    <label for="text">Company name:</label><br>
+    <input type="text" id="companyname" name="companyname"><br>
+    <label for="text">CompanyID:</label><br>
+    <input type="text" id="companyid" name="companyid"><br>
   </form>
+</div>
     
 </body>
