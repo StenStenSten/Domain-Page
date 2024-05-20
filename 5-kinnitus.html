@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>5-kinnitus</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<style>
+	body {
+		background-color: #AB9292;
+	}
+
+	.header {
+		background-color: #4E2525;
+	}
+
+	.header>img {
+		width: 100%;
+	}
+
+	h1 {
+		display: block;
+		width: fit-content;  /* Võtab minimaalse laiuse */
+		margin-top: 100px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.container {
+		margin-top: 20px;
+		width: 50%;
+	}
+
+	#company-name-row,
+	#company-id-row {
+		display: none;
+	}
+
+	.nupp {
+		display: block;
+		margin-top: 200px;
+		margin-left: auto;
+		margin-right: auto;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		padding-left: 30px;
+		padding-right: 30px;
+		border: none;
+		color: white;
+		background-color: #4E2525;
+	}
+</style>
+
+<body>
+	<div class="header">
+		<img src="images/snekkk.png">
+	</div>
+
+	<h1>Kinnita andmed</h1>
+
+	<div class="container">
+		<table class="table table-hover">
+			<tbody>
+				<tr>
+					<td>Eesnimi:</td>
+					<td id="usr"></td>
+				</tr>
+				<tr>
+					<td>Parool:</td>
+					<td id="pwd"></td>
+				</tr>
+				<tr>
+					<td>Email:</td>
+					<td id="email"></td>
+				</tr>
+				<tr>
+					<td>Telefon:</td>
+					<td id="phone"></td>
+				</tr>
+				<tr id="company-name-row">
+					<td>Firma nimi:</td>
+					<td id="company-name"></td>
+				</tr>
+				<tr id="company-id-row">
+					<td>Firma registrikood:</td>
+					<td id="company-id"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<button class="nupp" onclick="location.href = '6-maksmine.html';">Kinnita</button> <!-- Suunab nupule klõpsates uuele lehele -->
+</body>
+
+</html>
+<script>
+	var usr = localStorage.getItem("usr"); // Võtab väärtuse LocalStorage alt ja salvetsab muutujasse.
+	var pwd = localStorage.getItem("pwd");
+	var email = localStorage.getItem("email");
+	var phone = localStorage.getItem("phone");
+	var companyName = localStorage.getItem("companyName");
+	var companyId = localStorage.getItem("companyId");
+
+	document.querySelector("#usr").innerHTML = usr; // Paneb Localstorage väärtuse muutujast lehe lahtrisse.
+	document.querySelector("#pwd").innerHTML = pwd;
+	document.querySelector("#email").innerHTML = email;
+	document.querySelector("#phone").innerHTML = phone;
+
+	// Ainult tee seda, kui firma andmed on sisestatud.
+	if (companyName !== null && companyId !== null) {
+		// Näita firma lahtreid
+		document.querySelector("#company-name-row").style.display = "table-row";
+		document.querySelector("#company-id-row").style.display = "table-row";
+
+		// Pane firma lahtritesse info
+		document.querySelector("#company-name").innerHTML = companyName;
+		document.querySelector("#company-id").innerHTML = companyId;
+	}
+</script>
