@@ -97,26 +97,52 @@
 
 </html>
 <script>
-	var usr = localStorage.getItem("usr"); // Võtab väärtuse LocalStorage alt ja salvetsab muutujasse.
-	var pwd = localStorage.getItem("pwd");
-	var email = localStorage.getItem("email");
-	var phone = localStorage.getItem("phone");
-	var companyName = localStorage.getItem("companyName");
-	var companyId = localStorage.getItem("companyId");
+	document.addEventListener("DOMContentLoaded", function () {
+    var usr = localStorage.getItem("usr");
+    var pwd = localStorage.getItem("pwd");
+    var email = localStorage.getItem("email");
+    var phone = localStorage.getItem("phone");
+    var companyName = localStorage.getItem("companyName");
+    var companyId = localStorage.getItem("companyId");
 
-	document.querySelector("#usr").innerHTML = usr; // Paneb Localstorage väärtuse muutujast lehe lahtrisse.
-	document.querySelector("#pwd").innerHTML = pwd;
-	document.querySelector("#email").innerHTML = email;
-	document.querySelector("#phone").innerHTML = phone;
+    document.querySelector("#usr").innerText = usr || "-";
+    document.querySelector("#pwd").innerText = "********";  
+    document.querySelector("#email").innerText = email || "-";
+    document.querySelector("#phone").innerText = phone || "-";
 
-	// Ainult tee seda, kui firma andmed on sisestatud.
-	if (companyName !== null && companyId !== null) {
-		// Näita firma lahtreid
-		document.querySelector("#company-name-row").style.display = "table-row";
-		document.querySelector("#company-id-row").style.display = "table-row";
+    if (companyName && companyId) {
+        document.querySelector("#company-name-row").style.display = "table-row";
+        document.querySelector("#company-id-row").style.display = "table-row";
+        document.querySelector("#company-name").innerText = companyName;
+        document.querySelector("#company-id").innerText = companyId;
+    }
 
-		// Pane firma lahtritesse info
-		document.querySelector("#company-name").innerHTML = companyName;
-		document.querySelector("#company-id").innerHTML = companyId;
-	}
+    var userData = {
+        usr: usr || "",
+        pwd: pwd || "",
+        email: email || "",
+        phone: phone || "",
+        companyName: companyName || "",  
+        companyId: companyId || ""       
+    };
+
+    fetch("http://localhost:3000/save_data", { 
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Data saved:", data);
+        alert("Your data has been saved successfully!"); 
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Failed to save data. Please try again.");
+    }); 
+}); 
+
+
 </script>
