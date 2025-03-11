@@ -117,32 +117,35 @@
         document.querySelector("#company-id").innerText = companyId;
     }
 
-    var userData = {
-        usr: usr || "",
-        pwd: pwd || "",
-        email: email || "",
-        phone: phone || "",
-        companyName: companyName || "",  
-        companyId: companyId || ""       
-    };
+    // Check if data was already sent
+    if (!sessionStorage.getItem("dataSent")) {
+        var userData = {
+            usr: usr || "",
+            pwd: pwd || "",
+            email: email || "",
+            phone: phone || "",
+            companyName: companyName || "",  
+            companyId: companyId || ""       
+        };
 
-    fetch("http://localhost:3000/save_data", { 
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(userData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Data saved:", data);
-        alert("Your data has been saved successfully!"); 
-    })
-    .catch(error => {
-        console.error("Error:", error);
-        alert("Failed to save data. Please try again.");
-    }); 
-}); 
+        fetch("http://localhost:3000/save_data", { 
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(userData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Data saved:", data);
+            alert("Your data has been saved successfully!"); 
+            sessionStorage.setItem("dataSent", "true"); // Prevent duplicate submissions
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Failed to save data. Please try again.");
+        });
+    }
+});
+
 
 
 </script>
