@@ -117,8 +117,8 @@
         document.querySelector("#company-id").innerText = companyId;
     }
 
-    // Check if data was already sent
-    if (!sessionStorage.getItem("dataSent")) {
+    // Function to send data to backend
+    function saveData() {
         var userData = {
             usr: usr || "",
             pwd: pwd || "",
@@ -137,15 +137,34 @@
         .then(data => {
             console.log("Data saved:", data);
             alert("Your data has been saved successfully!"); 
-            sessionStorage.setItem("dataSent", "true"); // Prevent duplicate submissions
+
+            // Clear localStorage after successful submission
+            localStorage.removeItem("usr");
+            localStorage.removeItem("pwd");
+            localStorage.removeItem("email");
+            localStorage.removeItem("phone");
+            localStorage.removeItem("companyName");
+            localStorage.removeItem("companyId");
+
+            // Clear displayed form fields
+            document.querySelector("#usr").innerText = "-";
+            document.querySelector("#pwd").innerText = "********";
+            document.querySelector("#email").innerText = "-";
+            document.querySelector("#phone").innerText = "-";
+            document.querySelector("#company-name").innerText = "";
+            document.querySelector("#company-id").innerText = "";
+            document.querySelector("#company-name-row").style.display = "none";
+            document.querySelector("#company-id-row").style.display = "none";
         })
         .catch(error => {
             console.error("Error:", error);
             alert("Failed to save data. Please try again.");
         });
     }
+
+    // Attach event listener to the "Kinnita" button
+    document.querySelector(".nupp").addEventListener("click", function () {
+        saveData(); // Call saveData() when button is clicked
+    });
 });
-
-
-
 </script>
